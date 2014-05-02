@@ -1,0 +1,49 @@
+<?php
+// define variables and set to empty values
+$nameErr = $emailErr = $phoneErr = $contactErr = $messageErr = "";
+$name = $email = $phone = $contact = $message = "";
+ 
+ if ($_SERVER["REQUEST_METHOD"] == "POST")   {
+	 if (empty($_POST["name"]))  {
+		 $nameErr = "Name Is Required";
+	 } else {
+		 $name = test_input($_POST["name"]);
+		 // check if name only contains letters and white space
+		 if (!preg_match("/^[a-zA-Z]*$/",$name))   {
+			 $nameErr = "Please Enter Valid Name";
+		 }
+	 }
+	 
+	  if (empty($_POST["email"]))  {
+		 $emailErr = "Email Is Required";
+	 } else {
+		 $email = test_input($_POST["email"]);
+		 // check is e-mail address syntax is valid
+		 if (!preg_match("?([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email))      {
+			 $emailErr = "Email Is Invalid Format";
+		 }
+		 
+	 }
+	 
+	 if (empty($_POST["phone"]))  {
+		 $phone = "";
+	 } else {
+		 $phone = test_input($_POST["phone"]);
+		 //check if phone only contains numbers
+		 if (!preg_match("/^([1]-)?[0-9]{3}-[0-9]{3}-[0-9]{4}$/i",$phone))   {
+		 $phoneErr = "Please Enter A Valid Phone Number";
+		 }
+	 }
+	 if (empty($_POST["contact"]))  {
+		 $contactErr = "Please Choose An Option";
+	 } else {
+		 $contact = test_input($_POST["contact"]);
+	 }
+	  if (empty($_POST["message"]))  {
+		 $messageErr = "Please Enter A Brief Description";
+	 } else {
+		 $message = test_input($_POST["message"]);
+			 }
+
+ }
+ ?>
